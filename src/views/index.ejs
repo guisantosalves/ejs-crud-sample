@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lista de Notas</title>
+  </head>
+  <body>
+    <h1>Notas cadastradas:</h1>
+    <ul>
+      <% data.forEach(currNote => { %>
+      <li>
+        <strong>ID:</strong> <%= currNote.id %> | <strong>Conteúdo:</strong> <%=
+        currNote.note %>
+      </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>

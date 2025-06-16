@@ -2,16 +2,79 @@
 <html>
   <head>
     <title>Lista de Notas</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      a,
+      .create-btn {
+        margin-right: 10px;
+        text-decoration: none;
+        padding: 7px 15px;
+        background-color: #4caf50;
+        color: white;
+        border-radius: 4px;
+      }
+      .create-btn {
+        display: inline-block;
+        margin-bottom: 16px;
+      }
+
+      .delete-btn {
+        margin-right: 10px;
+        text-decoration: none;
+        padding: 8px 16px;
+        background-color: #aa3b4d;
+        color: white;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <h1>Notas cadastradas:</h1>
-    <ul>
-      <% data.forEach(currNote => { %>
-      <li>
-        <strong>ID:</strong> <%= currNote.id %> | <strong>Conteúdo:</strong> <%=
-        currNote.note %>
-      </li>
-      <% }) %>
-    </ul>
+
+    <a href="/views/notes/form" class="create-btn">Criar nova nota</a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Note</th>
+          <th>Date</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(currNote => { %>
+        <tr>
+          <td><%= currNote.note %></td>
+          <td><%= currNote.date %></td>
+          <td>
+            <a href="/views/notes/form?editar=<%= currNote.id %>">Alterar</a>
+
+            <form
+              action="/notes/<%= currNote.id %>?_method=DELETE"
+              method="POST"
+              style="display: inline"
+            >
+              <input type="hidden" name="_method" value="DELETE" />
+              <button type="submit" class="delete-btn">Excluir</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
   </body>
 </html>

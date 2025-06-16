@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import methodOverride from 'method-override';
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.use(cors());
 // Middlewares para processar o corpo da requisição
 app.use(express.json()); // Para processar corpos de requisição JSON
 app.use(express.urlencoded({ extended: true })); // Para processar corpos de requisição URL-encoded
+app.use(methodOverride('_method'));
 
 // routing API
 app.use(routes);

@@ -18,7 +18,7 @@ export default class NotesService {
     };
 
     this.notes.push(newNote);
-    return res.status(201).json(newNote);
+    return res.redirect("/views/notes");
   }
 
   // Read all
@@ -57,7 +57,7 @@ export default class NotesService {
     noteFound.date = data.date;
     noteFound.updatedAt = new Date();
 
-    return res.json(noteFound);
+    return res.redirect("/views/notes");
   }
 
   // Delete
@@ -70,6 +70,6 @@ export default class NotesService {
     }
 
     const deletedNote = this.notes.splice(index, 1)[0];
-    return res.json(deletedNote);
+    return res.redirect("/views/notes");
   }
 }

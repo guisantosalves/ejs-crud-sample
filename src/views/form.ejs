@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .inputs {
+        border-radius: 8px;
+        padding: 8px;
+        outline: none;
+        border: 1px solid black;
+        width: 96%;
+      }
+      .create-btn {
+        text-decoration: none;
+        padding: 8px 16px;
+        background-color: #4caf50;
+        color: white;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+        border: none;
+      }
+      .container-btn {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+      }
+      .main-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <title><%= data ? "Editar Nota" : "Criar Nota" %></title>
+  </head>
+  <body>
+    <div class="main-container">
+      <div style="width: 450px">
+        <h1><%= data ? "Editar Nota" : "Criar Nova Nota"%></h1>
+
+        <% if(data) { %>
+        <!-- editing here -->
+        <form
+          action="http://localhost:3000/notes/<%= data.id %>?_method=PUT"
+          method="POST"
+        >
+          <input type="hidden" name="_method" value="PUT" />
+          <div style="margin-bottom: 20px">
+            <label for="note">Nota:</label><br />
+            <textarea id="note" name="note" required class="inputs" rows="5"><%= data.note %></textarea
+            >
+          </div>
+
+          <div>
+            <label for="date">Data:</label><br />
+            <input
+              type="date"
+              id="date"
+              name="date"
+              placeholder="YYYY-MM-DD"
+              required
+              class="inputs"
+              value="<%= data.date %>"
+            />
+          </div>
+
+          <br />
+          <div class="container-btn">
+            <button type="submit" class="create-btn">Salvar</button>
+          </div>
+        </form>
+        <% } else { %>
+        <form action="http://localhost:3000/notes" method="POST">
+          <div style="margin-bottom: 20px">
+            <label for="note">Nota:</label><br />
+            <textarea
+              id="note"
+              name="note"
+              required
+              class="inputs"
+              rows="5"
+            ></textarea>
+          </div>
+
+          <div>
+            <label for="date">Data:</label><br />
+            <input
+              type="date"
+              id="date"
+              name="date"
+              placeholder="YYYY-MM-DD"
+              required
+              class="inputs"
+            />
+          </div>
+
+          <br />
+          <div class="container-btn">
+            <button type="submit" class="create-btn">Salvar</button>
+          </div>
+        </form>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
